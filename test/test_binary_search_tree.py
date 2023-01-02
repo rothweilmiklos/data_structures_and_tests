@@ -1,11 +1,10 @@
 import unittest
-
-from binary_search_tree import BinarySearchNode
+from binary_search_tree import BinarySearchTreeNode
 
 
 class TestBinarySearchTree(unittest.TestCase):
     def setUp(self) -> None:
-        self.bsn = BinarySearchNode()
+        self.bsn = BinarySearchTreeNode()
         self.bsn.add_node(data=5)
         self.bsn.add_node(data=2)
         self.bsn.add_node(data=13)
@@ -62,10 +61,25 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_post_order_traversal(self):
         self.assertEqual(self.bsn.post_order_traversal(), [3, 4, 2, 12, 15, 14, 13, 5])
 
+    def test_delete_value(self):
+        self.bsn.add_node(data=1)
+        self.bsn.add_node(data=20)
+        self.bsn.add_node(data=17)
+        self.bsn.add_node(data=30)
+
+        self.bsn.delete_value(13)
+        self.assertFalse(self.bsn.search(13))
+
+        self.bsn.delete_value(1)
+        self.assertFalse(self.bsn.search(1))
+
+        self.bsn.delete_value(20)
+        self.assertFalse(self.bsn.search(20))
+
 
 class TestEmptyBinarySearchTree(unittest.TestCase):
     def setUp(self) -> None:
-        self.empty_bsn = BinarySearchNode()
+        self.empty_bsn = BinarySearchTreeNode()
 
     def test_search_in_empty_tree(self):
         self.assertFalse(self.empty_bsn.search(2))
@@ -84,6 +98,9 @@ class TestEmptyBinarySearchTree(unittest.TestCase):
 
     def test_traversal_post_order_in_empty_tree(self):
         self.assertEqual(self.empty_bsn.post_order_traversal(), [])
+
+    def test_delete_value_in_empty_tree(self):
+        self.assertIsNone(self.empty_bsn.delete_value(10))
 
 
 if __name__ == '__main__':

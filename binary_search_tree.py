@@ -1,4 +1,4 @@
-class BinarySearchNode:
+class BinarySearchTreeNode:
     def __init__(self, value=None):
         self.value = value
         self.left = None
@@ -20,14 +20,14 @@ class BinarySearchNode:
             if self.left:
                 self.left.add_node(data)
                 return
-            self.left = BinarySearchNode(value=data)
+            self.left = BinarySearchTreeNode(value=data)
             return
 
         if data > self.value:
             if self.right:
                 self.right.add_node(data)
                 return
-            self.right = BinarySearchNode(value=data)
+            self.right = BinarySearchTreeNode(value=data)
             return
 
     def search(self, value) -> bool:
@@ -116,3 +116,31 @@ class BinarySearchNode:
         traversal_list.append(self.value)
 
         return traversal_list
+
+    def delete_value(self, value):
+        if self.value is None:
+            return
+
+        elif value < self.value:
+            if self.left:
+                self.left = self.left.delete_value(value)
+
+        elif value > self.value:
+            if self.right:
+                self.right = self.right.delete_value(value)
+
+        else:
+            if self.left is None and self.right is None:
+                return None
+            elif self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.left
+            else:
+                right_subtree_min_value = self.right.get_min()
+                self.value = right_subtree_min_value
+                self.right = self.right.delete_value(right_subtree_min_value)
+
+        return self
+
+
