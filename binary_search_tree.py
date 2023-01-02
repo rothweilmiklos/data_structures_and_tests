@@ -73,6 +73,7 @@ class BinarySearchNode:
         return self.value
 
     def in_order_traversal(self, traversal_list=[]):
+        """First traverses the left subtree, then the root and at last the right subtree."""
         if self.value is None:
             return []
 
@@ -87,6 +88,7 @@ class BinarySearchNode:
         return traversal_list
 
     def pre_order_traversal(self, traversal_list=[]):
+        """First traverses the root, then the left subtree and at last the right subtree."""
         if self.value is None:
             return []
 
@@ -101,6 +103,7 @@ class BinarySearchNode:
         return traversal_list
 
     def post_order_traversal(self, traversal_list=[]):
+        """First traverses the left subtree, then the right subtree and at last the root."""
         if self.value is None:
             return []
 
